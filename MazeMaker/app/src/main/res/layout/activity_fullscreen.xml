@@ -1,0 +1,220 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0099cc"
+    tools:context="com.gorillagamedesign.mazemaker.FullscreenActivity">
+
+    <!-- The primary full-screen view. This can be replaced with whatever view
+         is needed to present your content, e.g. VideoView, SurfaceView,
+         TextureView, etc. -->
+    <TextView
+        android:id="@+id/fullscreen_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:keepScreenOn="true"
+        android:textColor="#000000"
+        android:textSize="50sp"
+        android:textStyle="bold" />
+
+    <!-- This FrameLayout insets its children based on system windows using
+         android:fitsSystemWindows. -->
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+
+
+
+
+        <com.gorillagamedesign.mazemaker.DrawingView
+            android:id="@+id/drawing"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:background="@android:color/transparent"
+            android:clickable="false"
+            android:fadingEdge="none" />
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <Button
+                android:id="@+id/hard"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/medium"
+                android:layout_alignStart="@+id/medium"
+                android:layout_below="@+id/medium"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/empty"
+                android:text=" "
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/medium"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/easy"
+                android:layout_alignStart="@+id/easy"
+                android:layout_below="@+id/easy"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/empty"
+                android:text=" "
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/easy"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/returnback"
+                android:layout_alignStart="@+id/returnback"
+                android:layout_below="@+id/returnback"
+                android:layout_marginTop="50dp"
+                android:background="@drawable/button"
+                android:elevation="1dp"
+                android:text=" "
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/newmaze"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="100dp"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="19dp"
+                android:background="@drawable/empty"
+                android:text="New Maze"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/returnback"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/empty"
+                android:text="Back"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <Button
+                android:id="@+id/settings"
+                style="@style/Widget.AppCompat.Button"
+                android:layout_width="80dp"
+                android:layout_height="30dp"
+                android:layout_alignLeft="@+id/returnback"
+                android:layout_alignStart="@+id/returnback"
+                android:layout_alignTop="@+id/returnback"
+                android:background="@drawable/empty"
+                android:text="Settings"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
+                android:textColorHighlight="@android:color/white"
+                android:textColorHint="@android:color/white"
+                android:textColorLink="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="180dip"
+                android:layout_height="30dip"
+                android:layout_centerInParent="true"
+                android:indeterminateOnly="false"
+                android:max="100"
+                android:progress="0"
+                android:progressDrawable="@drawable/progress_bar_states"
+                android:visibility="invisible"></ProgressBar>
+
+            <TextView
+                android:id="@+id/hardtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/hard"
+                android:layout_alignBottom="@+id/hard"
+                android:layout_alignLeft="@+id/mediumtext"
+                android:layout_alignStart="@+id/mediumtext"
+                android:text="Hard"
+                android:textColor="@android:color/white"
+                android:textAllCaps="true"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/easytext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/easy"
+                android:layout_alignBottom="@+id/easy"
+                android:layout_alignLeft="@+id/mediumtext"
+                android:layout_alignStart="@+id/mediumtext"
+                android:text="Easy"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+            <TextView
+                android:id="@+id/mediumtext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/medium"
+                android:layout_alignBottom="@+id/medium"
+                android:layout_marginLeft="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_toEndOf="@+id/medium"
+                android:layout_toRightOf="@+id/medium"
+                android:text="Medium"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:visibility="invisible" />
+
+        </RelativeLayout>
+    </FrameLayout>
+
+</FrameLayout>
