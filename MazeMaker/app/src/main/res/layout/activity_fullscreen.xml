@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#0099cc"
+    android:background="#000000"
     tools:context="com.gorillagamedesign.mazemaker.FullscreenActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
@@ -29,19 +29,11 @@
 
 
 
-        <com.gorillagamedesign.mazemaker.DrawingView
-            android:id="@+id/drawing"
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@android:color/transparent"
-            android:clickable="false"
-            android:fadingEdge="none" />
 
         <RelativeLayout
             android:id="@+id/RelativeLayout01"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
-
             <Button
                 android:id="@+id/hard"
                 style="@style/Widget.AppCompat.Button"
@@ -110,7 +102,7 @@
                 android:layout_height="30dp"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="19dp"
+                android:layout_marginBottom="10dp"
                 android:background="@drawable/empty"
                 android:text="New Maze"
                 android:textAlignment="center"
@@ -156,17 +148,6 @@
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
-            <ProgressBar
-                android:id="@+id/progressBar"
-                android:layout_width="180dip"
-                android:layout_height="30dip"
-                android:layout_centerInParent="true"
-                android:indeterminateOnly="false"
-                android:max="100"
-                android:progress="0"
-                android:progressDrawable="@drawable/progress_bar_states"
-                android:visibility="invisible"></ProgressBar>
-
             <TextView
                 android:id="@+id/hardtext"
                 android:layout_width="wrap_content"
@@ -176,8 +157,8 @@
                 android:layout_alignLeft="@+id/mediumtext"
                 android:layout_alignStart="@+id/mediumtext"
                 android:text="Hard"
-                android:textColor="@android:color/white"
                 android:textAllCaps="true"
+                android:textColor="@android:color/white"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:visibility="invisible" />
@@ -213,6 +194,91 @@
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:visibility="invisible" />
+
+            <Space
+                android:id="@+id/fullScreen"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignLeft="@+id/easytext"
+                android:layout_alignStart="@+id/easytext"
+                android:layout_below="@+id/returnback"
+                android:id="@+id/easyspace" />
+
+            <Space
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignLeft="@+id/easyspace"
+                android:layout_alignStart="@+id/easyspace"
+                android:layout_below="@+id/returnback"
+                android:id="@+id/mediumspace" />
+
+            <Space
+                android:layout_width="12.5dp"
+                android:layout_height="12.5dp"
+                android:layout_alignLeft="@+id/easyspace"
+                android:layout_alignStart="@+id/easyspace"
+                android:layout_below="@+id/returnback"
+                android:id="@+id/hardspace" />
+
+            <Space
+                android:id="@+id/top"
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:id="@+id/left" />
+
+            <Space
+                android:layout_width="fill_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:id="@+id/bottom" />
+
+            <Space
+                android:layout_width="50dp"
+                android:layout_height="fill_parent"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:id="@+id/right" />
+
+            <Space
+                android:id="@+id/screenbounds"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/bottom"
+                android:layout_below="@+id/returnback"
+                android:layout_toEndOf="@+id/left"
+                android:layout_toLeftOf="@+id/right"
+                android:layout_toRightOf="@+id/left"
+                android:layout_toStartOf="@+id/right" />
+            <com.gorillagamedesign.mazemaker.DrawingView
+                android:id="@+id/drawing"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="@android:color/transparent"
+                android:clickable="false"
+                android:fadingEdge="none" />
 
         </RelativeLayout>
     </FrameLayout>

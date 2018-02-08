@@ -6,10 +6,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
+import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ProgressBar;
+import android.widget.Space;
 import android.widget.TextView;
+
+import java.util.TimerTask;
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -109,6 +113,7 @@ public class FullscreenActivity extends AppCompatActivity {
         // operations to prevent the jarring behavior of controls going away
         // while interacting with the UI.
     }
+    public static DrawingView drawingView;
     private Button settingsButton;
     private Button returnButton;
     private Button newMazeButton;
@@ -118,8 +123,15 @@ public class FullscreenActivity extends AppCompatActivity {
     private TextView easyChoiceText;
     private TextView mediumChoiceText;
     private TextView hardChoiceText;
-    private ProgressBar mazeMakingProgress;
-    private void defineVars() {
+    private Space easy;
+    private Space medium;
+    private Space hard;
+    private Space top;
+    private Space left;
+    private Space bounds;
+    public void defineVars()
+    {
+        drawingView = findViewById(R.id.drawing);
         settingsButton = findViewById(R.id.settings);
         returnButton = findViewById(R.id.returnback);
         newMazeButton = findViewById(R.id.newmaze);
@@ -129,10 +141,21 @@ public class FullscreenActivity extends AppCompatActivity {
         easyChoiceText = findViewById(R.id.easytext);
         mediumChoiceText = findViewById(R.id.mediumtext);
         hardChoiceText = findViewById(R.id.hardtext);
-        mazeMakingProgress = findViewById(R.id.progressBar);
-        settingsButton.setOnClickListener(new View.OnClickListener() {
+        easy = findViewById(R.id.easyspace);
+        medium = findViewById(R.id.mediumspace);
+        hard = findViewById(R.id.hardspace);
+        top = findViewById(R.id.top);
+        left = findViewById(R.id.left);
+        bounds = findViewById(R.id.screenbounds);
+        drawingView.height = bounds.getHeight();
+        drawingView.width = bounds.getWidth();
+        drawingView.marginHeight = top.getHeight();
+        drawingView.marginWidth = left.getWidth();
+        settingsButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 settingsButton.setVisibility(View.INVISIBLE);
                 returnButton.setVisibility(View.VISIBLE);
                 newMazeButton.setVisibility(View.INVISIBLE);
@@ -142,11 +165,15 @@ public class FullscreenActivity extends AppCompatActivity {
                 easyChoiceText.setVisibility(View.VISIBLE);
                 mediumChoiceText.setVisibility(View.VISIBLE);
                 hardChoiceText.setVisibility(View.VISIBLE);
+                drawingView.drawing = false;
+                drawingView.setVisibility(View.INVISIBLE);
             }
         });
-        returnButton.setOnClickListener(new View.OnClickListener() {
+        returnButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view)
+            {
                 settingsButton.setVisibility(View.VISIBLE);
                 returnButton.setVisibility(View.INVISIBLE);
                 newMazeButton.setVisibility(View.VISIBLE);
@@ -156,49 +183,68 @@ public class FullscreenActivity extends AppCompatActivity {
                 easyChoiceText.setVisibility(View.INVISIBLE);
                 mediumChoiceText.setVisibility(View.INVISIBLE);
                 hardChoiceText.setVisibility(View.INVISIBLE);
+                drawingView.drawing = true;
+                drawingView.setVisibility(View.VISIBLE);
             }
         });
-        easyChoiceButton.setOnClickListener(new View.OnClickListener() {
+        easyChoiceButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                DrawingView.difficulty = 1;
+            public void onClick(View view)
+            {
+                drawingView.difficulty = 1;
                 easyChoiceButton.setBackground(getResources().getDrawable(R.drawable.button));
                 mediumChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
                 hardChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
+                drawingView.gridSquareSize = easy.getWidth();
             }
         });
-        mediumChoiceButton.setOnClickListener(new View.OnClickListener() {
+        mediumChoiceButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                DrawingView.difficulty = 2;
+            public void onClick(View view)
+            {
+                drawingView.difficulty = 2;
                 easyChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
                 mediumChoiceButton.setBackground(getResources().getDrawable(R.drawable.button));
                 hardChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
+                drawingView.gridSquareSize = medium.getWidth();
             }
         });
-        hardChoiceButton.setOnClickListener(new View.OnClickListener() {
+        hardChoiceButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-                DrawingView.difficulty = 3;
+            public void onClick(View view)
+            {
+                drawingView.difficulty = 3;
                 easyChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
                 mediumChoiceButton.setBackground(getResources().getDrawable(R.drawable.empty));
                 hardChoiceButton.setBackground(getResources().getDrawable(R.drawable.button));
+                drawingView.gridSquareSize = hard.getWidth();
             }
         });
-        newMazeButton.setOnClickListener(new View.OnClickListener() {
+        newMazeButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View view) {
-            DrawingView.loadedAmount = 0;
-            mazeMakingProgress.setVisibility(View.VISIBLE);
+            public void onClick(View view)
+            {
+                drawingView.init();
+                drawingView.drawing = true;
+                drawingView.creating = true;
+                drawingView.drawTimer.schedule(new TimerTask() {
+                    @Override
+                    public void run() {
+                        drawingView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                drawingView.paintInterval();
+                            }
+                        }, 0);
+                    }
+                }, 10, 1);
             }
         });
-    }
-    public void setLoadedAmount(int loadedAmount)
-    {
-        if(loadedAmount <= 100)
-            mazeMakingProgress.setProgress(loadedAmount);
-        else
-            mazeMakingProgress.setVisibility(View.INVISIBLE);
+        drawingView.gridSquareSize = easy.getWidth();
     }
     @Override
     protected void onPostCreate(Bundle savedInstanceState) {
